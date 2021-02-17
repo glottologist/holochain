@@ -20,7 +20,8 @@ rec {
     # run the specific slow tests in the holochain crate
     cargo test --manifest-path=crates/holochain/Cargo.toml --features slow_tests -- --nocapture
     # run all the remaining cargo tests
-    cargo test -- --nocapture
+    # limit parallel jobs to reduce memory consumption
+    cargo test --jobs 1 -- --nocapture
   '';
 
   hcMergeTest = let
